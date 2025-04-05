@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Shop Acc Game PRO (TEST)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: 'fadeIn 0.8s ease-in-out',
+            slideIn: 'slideIn 0.5s ease-out',
+            bounceEffect: 'bounceEffect 1s infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+            slideIn: {
+              '0%': { transform: 'translateX(100%)' },
+              '100%': { transform: 'translateX(0)' },
+            },
+            bounceEffect: {
+              '0%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.1)' },
+              '100%': { transform: 'scale(1)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>body { font-family: 'Roboto', sans-serif; }</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-white shadow-lg fixed top-0 left-0 w-full z-50 animate-fadeIn">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-3xl font-bold text-blue-600">🎮 Shop Acc Game PRO (TEST)</h1>
+      <nav class="space-x-6">
+        <a href="#home" class="text-lg hover:text-blue-600">Trang chủ</a>
+        <a href="#pricing" class="text-lg hover:text-blue-600">Bảng giá</a>
+        <a href="#login" class="text-lg hover:text-blue-600">Đăng nhập</a>
+        <button onclick="toggleCart()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+          🛒 Giỏ hàng (<span id="cart-count">0</span>)
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="mt-24 bg-cover bg-center relative" style="background-image: url('https://i.postimg.cc/QNWBz79X/sunset-evening-beautiful-landscape-wallpaper-2560x1600-7.jpg');">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative z-10 text-center text-white py-24">
+      <h2 class="text-5xl font-bold">Chào mừng đến với Shop Acc Game PRO</h2>
+      <p class="text-xl mt-4">Khám phá tài khoản game đẳng cấp, nhanh chóng và đáng tin cậy!</p>
+      <button class="mt-6 px-6 py-3 bg-blue-600 rounded hover:bg-blue-700 text-white">Khám Phá Ngay</button>
+    </div>
+  </section>
+
+  <!-- Danh sách sản phẩm -->
+  <section id="products" class="py-16 max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-8">🔥 Sản phẩm bán chạy</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="product-list">
+      <!-- Render Products bằng JS -->
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-16 bg-gray-200">
+    <h2 class="text-3xl font-bold text-center mb-8">💰 Bảng Giá</h2>
+    <table class="w-full text-left border border-gray-300">
+      <thead class="bg-blue-600 text-white">
+        <tr>
+          <th class="p-4">Game</th>
+          <th class="p-4">Gói</th>
+          <th class="p-4">Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white hover:bg-gray-100">
+          <td class="p-4">Liên Quân</td>
+          <td class="p-4">VIP Rank</td>
+          <td class="p-4 text-red-600">500.000đ</td>
+        </tr>
+        <tr class="bg-white hover:bg-gray-100">
+          <td class="p-4">LMHT</td>
+          <td class="p-4">Kim Cương</td>
+          <td class="p-4 text-red-600">700.000đ</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Đăng nhập -->
+  <section id="login" class="py-16 max-w-md mx-auto px-6">
+    <h2 class="text-2xl font-bold mb-6 text-center">🔐 Đăng nhập tài khoản</h2>
+    <form class="bg-white shadow-md rounded p-6 space-y-4">
+      <input type="text" class="w-full p-4 border rounded" placeholder="Tên đăng nhập">
+      <input type="password" class="w-full p-4 border rounded" placeholder="Mật khẩu">
+      <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700">Đăng nhập</button>
+    </form>
+  </section>
+
+  <!-- Giỏ hàng -->
+  <aside id="cart" class="fixed top-0 right-0 w-full max-w-md h-full bg-white shadow-lg p-6 transform translate-x-full transition-transform z-50 overflow-y-auto animate-slideIn">
+    <h2 class="text-2xl font-bold mb-4 text-blue-600">🛍️ Giỏ hàng</h2>
+    <div id="cart-items" class="space-y-4"></div>
+    <div class="mt-4 border-t pt-4">
+      <p class="text-lg font-semibold">Tổng: <span id="cart-total">0</span> VNĐ</p>
+      <button onclick="checkout()" class="w-full mt-4 bg-green-600 text-white py-2 rounded hover:bg-green-700">Thanh toán</button>
+      <button onclick="toggleCart()" class="w-full mt-2 text-red-600 underline">Đóng</button>
+    </div>
+  </aside>
+
+  <!-- Live Chat -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="alert('Chức năng chat đang phát triển')" class="bg-purple-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-purple-700 animate-bounce">
+      💬 Chat hỗ trợ
+    </button>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: "Acc Liên Quân VIP", price: 500000, img: "https://i.postimg.cc/0Q9s0LwM/a9cf7feb9750931953d269a4a359f98a6597c187caca01.jpg" },
+      { id: 2, name: "Acc Blox Fruit Giá Rẻ", price: 100000, img: "https://i.postimg.cc/nz36YMxg/cay-thue-blox-fruit.jpg" },
+      { id: 3, name: "Acc Valorant Full Skin", price: 1000000, img: "https://i.postimg.cc/g0FdnwcK/thumb.png" },
+      { id: 4, name: "Acc Genshin Impact VIP", price: 1200000, img: "https://i.postimg.cc/7Lk8qpXs/5d2ba4371115d26de4c574b28311aed8-6657634105506295358.jpg" }
+    ];
+
+    const cart = [];
+
+    function renderProducts() {
+      const container = document.getElementById("product-list");
+      container.innerHTML = "";
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-xl shadow hover:shadow-xl overflow-hidden transform hover:scale-105 transition duration-300";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}" class="w-full h-40 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold text-lg">${p.name}</h3>
+            <p class="text-red-600 font-bold">${p.price.toLocaleString()} VNĐ</p>
+            <button onclick="addToCart(${p.id})" class="mt-3 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Mua ngay</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function addToCart(id) {
+      const item = products.find(p => p.id === id);
+      cart.push(item);
+      updateCart();
+    }
+
+    function updateCart() {
+      document.getElementById("cart-count").textContent = cart.length;
+      const cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach(p => {
+        total += p.price;
+        const div = document.createElement("div");
+        div.className = "flex justify-between border-b py-2";
+        div.innerHTML = `<span>${p.name}</span><span class='text-red-600'>${p.price.toLocaleString()} VNĐ</span>`;
+        cartItems.appendChild(div);
+      });
+      document.getElementById("cart-total").textContent = total.toLocaleString();
+    }
+
+    function toggleCart() {
+      const cartDiv = document.getElementById("cart");
+      cartDiv.classList.toggle("translate-x-full");
+    }
+
+    function checkout() {
+      if (cart.length === 0) return alert("🛑 Giỏ hàng trống!");
+      alert("🎉 Cảm ơn bạn đã mua hàng! Hệ thống thanh toán sẽ sớm được cập nhật.");
+      cart.length = 0;
+      updateCart();
+      toggleCart();
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>
